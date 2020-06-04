@@ -72,11 +72,11 @@ def render_request():
 @app.route("/request_done/", methods=["POST"])
 def render_request_done():
     form = FormRequest(csrf_enabled=False)
-    #new_request = {'goal': form.goal.data, 'time': form.time.data, \
-    #               'name': form.name.data, 'phone': form.phone.data}
-    #requests = load_data("requests")
-    #requests.append(new_request)
-    #save_data("requests", requests)
+    new_request = {'goal': form.goal.data, 'time': form.time.data, \
+                   'name': form.name.data, 'phone': form.phone.data}
+    requests = load_data("requests")
+    requests.append(new_request)
+    save_data("requests", requests)
     return render_template("request_done.html", form=form)
 
 
@@ -121,11 +121,11 @@ def render_booking_done():
     if flag:
         free[form.id_teacher.data][form.day.data][form.time.data] = False
         save_data("free", free)
-        #new_booking = {"id_teacher": form.id_teacher.data, "day": form.day.data, \
-        #               "time": form.time.data, "name": form.name.data, "phone": form.phone.data}
-        #booking = load_data("booking")
-        #booking.append(new_booking)
-        #save_data("booking", booking)
+        new_booking = {"id_teacher": form.id_teacher.data, "day": form.day.data, \
+                       "time": form.time.data, "name": form.name.data, "phone": form.phone.data}
+        booking = load_data("booking")
+        booking.append(new_booking)
+        save_data("booking", booking)
         return render_template("booking_done.html", form=form, days=days) #"заявка отправлена"
     else:
         return "Кто-то уже успел забронировать выбранное вами время." # тут лучше бы специальный шаблон, либо защита от случайного обновления страницы браузера
